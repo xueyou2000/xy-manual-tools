@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "target": "es5",
+        "module": "esnext",
+        "declaration": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "jsx": "react",
+        "importHelpers": true,
+        "strict": false,
+        "lib": ["dom", "esnext"],
+        "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    }
+}
