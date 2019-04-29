@@ -16,9 +16,6 @@ tools.createLoadExamplesEntry();
 module.exports = () => {
     const packageJson = tools.getPackageConfig();
     const summarys = tools.getManualSummary();
-
-    console.log({ from: path.resolve(__dirname, "../static/**/*"), to: PATHS.resolveProject("demo/static") });
-
     return {
         mode: "production",
         devtool: "none",

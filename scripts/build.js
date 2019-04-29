@@ -19,7 +19,7 @@ module.exports = (cmd) => {
             }
         })
         .then(() => {
-            console.log("ok");
+            console.log("编译完毕");
         })
         .catch((error) => {
             console.log(error.message);

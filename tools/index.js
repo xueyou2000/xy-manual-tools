@@ -23,7 +23,6 @@ module.exports.spawnAsync = function spawnAsync(command, args, options) {
     return new Promise((resolve, reject) => {
         const child = spawn(command, args, options);
         child.on("close", (code) => {
-            console.log("code", code);
             if (code !== 0) {
                 reject(new Error(`command: ${command} ${args.toString()}`));
             } else {
