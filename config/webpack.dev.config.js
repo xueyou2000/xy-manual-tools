@@ -5,18 +5,19 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const PATHS = require("./path");
-const tools = require("./tools");
+const tools = require("../tools");
 
 tools.createLoadExamplesEntry();
 
 module.exports = () => {
     const packageJson = tools.getPackageConfig();
+    const summarys = tools.getManualSummary();
 
     return {
         mode: "development",
         devtool: "eval-source-map",
-        entry: PATHS.resolveCodebox("main.tsx"),
         context: PATHS.projectDirectory,
+        entry: PATHS.resolveCodebox("main.tsx"),
         output: {
             path: path.resolve(__dirname, "dist"),
             filename: "js/[name].js",
@@ -25,7 +26,6 @@ module.exports = () => {
         resolve: {
             extensions: [".ts", ".tsx", ".js", ".jsx", ".css"],
             alias: {
-                // [`${packageJson.name}`]: "./src/index.tsx"
                 [`${packageJson.name}$`]: PATHS.resolveProject("./src/index.tsx"),
                 [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js")
             }
@@ -94,6 +94,13 @@ module.exports = () => {
             runtimeChunk: "single",
             splitChunks: {
                 cacheGroups: {
+                    components: {
+                        test: /xy-(\w+)/,
+                        name: "components",
+                        chunks: "all",
+                        enforce: true,
+                        priority: 1
+                    },
                     bundle: {
                         test: /[\\/]node_modules[\\/]/,
                         name: "bundle",
@@ -105,14 +112,17 @@ module.exports = () => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                "process.env.project": JSON.stringify(PATHS.projectDirectory)
-                // "process.env.examples": JSON.stringify(tools.loadExamples())
+                "process.env.componentName": JSON.stringify(packageJson.name),
+                "process.env.SummaryStart": JSON.stringify(summarys[0]),
+                "process.env.SummaryHeader": JSON.stringify(summarys[1]),
+                "process.env.SummaryAPI": JSON.stringify(summarys[2]),
+                "process.env.SummaryFooter": JSON.stringify(summarys[3])
             }),
             new CleanWebpackPlugin(),
             new CaseSensitivePathsPlugin(),
             new HtmlWebpackPlugin({
                 filename: "index.html",
-                template: PATHS.resolveCodebox("index.html"),
+                template: PATHS.resolveCodebox("Assets/index.html"),
                 inject: true,
                 title: packageJson.name
             }),

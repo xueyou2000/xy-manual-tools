@@ -9,3 +9,5 @@ require("core-js/features/array/from");
 require("core-js/features/map");
 require("core-js/features/set");
 require("core-js/features/promise");
+require("core-js/features/object/values");
+require("core-js/features/object/keys");

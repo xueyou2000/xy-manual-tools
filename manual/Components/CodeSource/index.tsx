@@ -1,10 +1,13 @@
 import React from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
+import "prismjs/components/prism-markup";
+import "prismjs/components/prism-markdown";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-tsx";
 import "prismjs/plugins/normalize-whitespace/prism-normalize-whitespace";
+import "./index.scss";
 
 interface CodeSourceProps {
     /**
@@ -14,7 +17,7 @@ interface CodeSourceProps {
     /**
      * 代码语言
      */
-    language?: "javascript" | "jsx" | "tsx";
+    language?: "javascript" | "jsx" | "tsx" | "md" | "markup";
 }
 
 /**

@@ -1,20 +1,24 @@
 {
-    "name": "react-demo",
+    "name": "xy-manual-tools",
     "version": "0.0.1",
-    "description": "一个React代码演示工具, 使用webpack打包",
+    "description": "一个xyUI组件的文档演示, 生成工具",
     "main": "bin/cli.js",
     "bin": {
         "quick-react-scripts": "./bin/cli.js"
     },
     "author": "XueYou",
     "license": "MIT",
-    "sideEffects": false,
+    "sideEffects": [
+        "*.css",
+        "*.scss"
+    ],
     "files": [
         "bin",
-        "codeBox",
+        "manual",
         "config",
         "scripts",
-        "static"
+        "static",
+        "tools"
     ],
     "scripts": {
         "dev": "webpack-dev-server --config config/webpack.dev.config.js",
@@ -25,10 +29,12 @@
         "@fortawesome/fontawesome-svg-core": "^1.2.17",
         "@fortawesome/free-solid-svg-icons": "^5.8.1",
         "@fortawesome/react-fontawesome": "^0.1.4",
+        "@microsoft/tsdoc": "^0.12.9",
         "awesome-typescript-loader": "^5.2.1",
         "case-sensitive-paths-webpack-plugin": "^2.2.0",
         "classnames": "^2.2.6",
         "clean-webpack-plugin": "^2.0.1",
+        "colors": "^1.3.3",
         "commander": "^2.20.0",
         "copy-webpack-plugin": "^5.0.3",
         "core-js": "^3.0.1",
@@ -38,6 +44,7 @@
         "fs-extra": "^7.0.1",
         "glob": "^7.1.3",
         "html-webpack-plugin": "^3.2.0",
+        "markdown": "^0.5.0",
         "mini-css-extract-plugin": "^0.6.0",
         "node-sass": "^4.11.0",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -52,11 +59,16 @@
         "url-loader": "^1.1.2",
         "utils-hooks": "^0.0.65",
         "webpack": "^4.30.0",
+        "webpack-bundle-analyzer": "^3.3.2",
         "webpack-cli": "^3.3.1",
         "webpack-dev-server": "^3.3.1",
         "webpack-manifest-plugin": "^2.0.4",
+        "xy-affix": "1.1.0",
+        "xy-button": "^0.0.3",
         "xy-divider": "^0.0.2",
-        "xy-grid": "^0.0.3"
+        "xy-grid": "^0.0.3",
+        "xy-messagebox": "^0.0.5",
+        "xy-model": "^0.0.2"
     },
     "devDependencies": {
         "@types/classnames": "^2.2.7",

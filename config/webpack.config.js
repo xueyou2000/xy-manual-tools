@@ -7,11 +7,15 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const PATHS = require("./path");
-const tools = require("./tools");
+const tools = require("../tools");
+
+tools.createLoadExamplesEntry();
 
 module.exports = () => {
     const packageJson = tools.getPackageConfig();
+    const summarys = tools.getManualSummary();
 
     return {
         mode: "production",
@@ -26,7 +30,11 @@ module.exports = () => {
         resolve: {
             extensions: [".ts", ".tsx", ".js", ".jsx"],
             alias: {
-                [`${packageJson.name}`]: "./src/index.tsx"
+                "@fortawesome/react-fontawesome": path.resolve(__dirname, "../node_modules/@fortawesome/react-fontawesome"),
+                "@fortawesome/free-solid-svg-icons": path.resolve(__dirname, "../node_modules/@fortawesome/free-solid-svg-icons"),
+                "@fortawesome/free-svg-core": path.resolve(__dirname, "../node_modules/@fortawesome/free-svg-core"),
+                [`${packageJson.name}$`]: PATHS.resolveProject("./src/index.tsx"),
+                [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js")
             }
         },
         externals: {
@@ -36,22 +44,24 @@ module.exports = () => {
         module: {
             rules: [
                 {
-                    test: /\.(js|ts)x?$/,
+                    test: /\.(ts)x?$/,
                     include: [PATHS.resolveProject("src"), PATHS.resolveProject("examples"), PATHS.codeboxDirectory],
                     use: {
                         loader: require.resolve("awesome-typescript-loader"),
                         options: {
-                            useCache: true
+                            useCache: true,
+                            configFileName: PATHS.resolveProject("tsconfig.json")
                         }
                     }
                 },
                 {
                     test: /\.css$/,
-                    loaders: [MiniCssExtractPlugin.loader, require.resolve("style-loader"), require.resolve("css-loader")]
+                    use: [MiniCssExtractPlugin.loader, require.resolve("css-loader")]
                 },
                 {
                     test: /\.scss$/,
-                    loaders: [MiniCssExtractPlugin.loader, require.resolve("sass-loader")]
+                    include: [PATHS.resolveProject("src"), PATHS.resolveProject("examples"), PATHS.codeboxDirectory],
+                    use: [MiniCssExtractPlugin.loader, require.resolve("css-loader"), require.resolve("sass-loader")]
                 },
                 {
                     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -84,7 +94,7 @@ module.exports = () => {
             splitChunks: {
                 cacheGroups: {
                     components: {
-                        test: /xy-(\w+)/,
+                        test: /(xy-(\w+)|utils-)/,
                         name: "components",
                         chunks: "all",
                         enforce: true,
@@ -100,11 +110,18 @@ module.exports = () => {
             }
         },
         plugins: [
+            new webpack.DefinePlugin({
+                "process.env.componentName": JSON.stringify(packageJson.name),
+                "process.env.SummaryStart": JSON.stringify(summarys[0]),
+                "process.env.SummaryHeader": JSON.stringify(summarys[1]),
+                "process.env.SummaryAPI": JSON.stringify(summarys[2]),
+                "process.env.SummaryFooter": JSON.stringify(summarys[3])
+            }),
             new CleanWebpackPlugin(),
             new CaseSensitivePathsPlugin(),
             new HtmlWebpackPlugin({
                 filename: "index.html",
-                template: PATHS.resolveCodebox("index.html"),
+                template: PATHS.resolveCodebox("Assets/index.html"),
                 inject: true,
                 title: packageJson.name
             }),
@@ -112,8 +129,9 @@ module.exports = () => {
             new webpack.HashedModuleIdsPlugin(),
             new webpack.optimize.ModuleConcatenationPlugin(),
             new OptimizeCSSAssetsPlugin(),
-            new CopyWebpackPlugin(["../codeBox/static/**/*"]),
-            new MiniCssExtractPlugin({ filename: "css/[name].css" })
+            new CopyWebpackPlugin([{ from: path.resolve(__dirname, "../static/**/*"), to: PATHS.resolveProject("demo/static") }]),
+            new MiniCssExtractPlugin({ filename: "css/[name].[hash].css" })
+            // new BundleAnalyzerPlugin()
         ]
     };
 };

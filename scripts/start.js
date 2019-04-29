@@ -3,12 +3,10 @@ const rm = require("rimraf");
 const chalk = require("chalk");
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
-const webpackConfig = require("../config/webpack.dev.config")();
-const tools = require("../config/tools");
+const tools = require("../tools");
 const path = require("path");
 
 module.exports = (project_directory, cmd) => {
-    console.log(webpackConfig.resolve.alias);
     tools
         .spawnAsync("npm", ["run", "dev"], {
             stdio: "inherit",

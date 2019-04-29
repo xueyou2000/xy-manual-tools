@@ -1,0 +1,34 @@
+.language-md {
+    background: #fff !important;
+    code.language-md {
+        color: #314659;
+        font-size: 14px;
+        line-height: 2;
+        text-shadow: none;
+
+        white-space: pre-line;
+        word-spacing: normal;
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+
+    .token.punctuation {
+        color: #e91e63;
+    }
+}
+
+.title {
+    text-indent: 13px;
+}
+
+.title,
+.language-md .title {
+    margin-top: 8px;
+    margin-bottom: 20px;
+    color: #0d1a26;
+    font-weight: 500;
+    font-size: 30px;
+    font-family: Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        sans-serif;
+    line-height: 38px;
+}

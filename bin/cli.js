@@ -5,7 +5,7 @@ const package = require("../package.json");
 const build = require("../scripts/build");
 const start = require("../scripts/start");
 
-const program = new commander.Command(package.name).version(package.version).usage(`${chalk.cyan("React项目例子演示工具")}`);
+const program = new commander.Command(package.name).version(package.version).usage(`${chalk.cyan(package.description)}`);
 
 // build
 program.command("build").action(build);
