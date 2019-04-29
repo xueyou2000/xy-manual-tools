@@ -6378,6 +6378,20 @@ xy-grid@^0.0.3:
     react-dom "^16.8.2"
     utils-hooks "0.0.65"
 
+xy-messagebox@0.0.52:
+  version "0.0.52"
+  resolved "https://registry.npm.taobao.org/xy-messagebox/download/xy-messagebox-0.0.52.tgz#fe37bd7473ada91362b7d0a1974e22a6dbdd9476"
+  integrity sha1-/je9dHOtqRNit9Chl04iptvdlHY=
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" "^1.2.17"
+    "@fortawesome/free-solid-svg-icons" "^5.8.1"
+    "@fortawesome/react-fontawesome" "^0.1.4"
+    classnames "^2.2.6"
+    react "^16.8.2"
+    react-dom "^16.8.2"
+    utils-hooks "0.0.65"
+    xy-button "0.0.3"
+
 xy-messagebox@^0.0.4:
   version "0.0.4"
   resolved "https://registry.npm.taobao.org/xy-messagebox/download/xy-messagebox-0.0.4.tgz#337a0ea8a19d53d237fc3a088837dbe0fcb47224"
@@ -6391,20 +6405,6 @@ xy-messagebox@^0.0.4:
     react-dom "^16.8.2"
     utils-hooks "0.0.63"
     xy-button "^0.0.2"
-
-xy-messagebox@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.npm.taobao.org/xy-messagebox/download/xy-messagebox-0.0.5.tgz#e4074fd7d101584380abd978a857ad3fa701f2f7"
-  integrity sha1-5AdP19EBWEOAq9l4qFetP6cB8vc=
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" "^1.2.17"
-    "@fortawesome/free-solid-svg-icons" "^5.8.1"
-    "@fortawesome/react-fontawesome" "^0.1.4"
-    classnames "^2.2.6"
-    react "^16.8.2"
-    react-dom "^16.8.2"
-    utils-hooks "0.0.65"
-    xy-button "0.0.3"
 
 xy-model@^0.0.2:
   version "0.0.2"

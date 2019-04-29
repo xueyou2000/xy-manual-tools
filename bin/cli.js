@@ -11,7 +11,10 @@ const program = new commander.Command(package.name).version(package.version).usa
 program.command("build").action(build);
 
 // start
-program.command("start").action(start);
+program
+    .command("start")
+    .option("-p, --prot [value]", "端口", "8080")
+    .action(start);
 
 // run
 program.parse(process.argv);

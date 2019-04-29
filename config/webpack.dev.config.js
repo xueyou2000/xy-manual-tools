@@ -19,7 +19,7 @@ module.exports = () => {
         context: PATHS.projectDirectory,
         entry: PATHS.resolveCodebox("main.tsx"),
         output: {
-            path: path.resolve(__dirname, "dist"),
+            path: path.resolve(__dirname, "../dist"),
             filename: "js/[name].js",
             chunkFilename: "js/[name].chunk.js"
         },
@@ -35,7 +35,7 @@ module.exports = () => {
             "react-dom": "ReactDOM"
         },
         devServer: {
-            port: packageJson.prot || 8080,
+            port: process.env.prot || 8080,
             hot: true,
             inline: true,
             open: true,

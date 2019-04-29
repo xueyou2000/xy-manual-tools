@@ -1,10 +1,10 @@
 {
     "name": "xy-manual-tools",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "一个xyUI组件的文档演示, 生成工具",
     "main": "bin/cli.js",
     "bin": {
-        "quick-react-scripts": "./bin/cli.js"
+        "xy-manual-tools": "./bin/cli.js"
     },
     "author": "XueYou",
     "license": "MIT",
@@ -18,7 +18,9 @@
         "config",
         "scripts",
         "static",
-        "tools"
+        "tools",
+        "file.d.ts",
+        "tsconfig.json"
     ],
     "scripts": {
         "dev": "webpack-dev-server --config config/webpack.dev.config.js",
@@ -67,7 +69,7 @@
         "xy-button": "^0.0.3",
         "xy-divider": "^0.0.2",
         "xy-grid": "^0.0.3",
-        "xy-messagebox": "^0.0.5",
+        "xy-messagebox": "0.0.52",
         "xy-model": "^0.0.2"
     },
     "devDependencies": {

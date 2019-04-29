@@ -17,6 +17,8 @@ module.exports = () => {
     const packageJson = tools.getPackageConfig();
     const summarys = tools.getManualSummary();
 
+    console.log({ from: path.resolve(__dirname, "../static/**/*"), to: PATHS.resolveProject("demo/static") });
+
     return {
         mode: "production",
         devtool: "none",
@@ -30,9 +32,6 @@ module.exports = () => {
         resolve: {
             extensions: [".ts", ".tsx", ".js", ".jsx"],
             alias: {
-                "@fortawesome/react-fontawesome": path.resolve(__dirname, "../node_modules/@fortawesome/react-fontawesome"),
-                "@fortawesome/free-solid-svg-icons": path.resolve(__dirname, "../node_modules/@fortawesome/free-solid-svg-icons"),
-                "@fortawesome/free-svg-core": path.resolve(__dirname, "../node_modules/@fortawesome/free-svg-core"),
                 [`${packageJson.name}$`]: PATHS.resolveProject("./src/index.tsx"),
                 [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js")
             }
@@ -129,7 +128,7 @@ module.exports = () => {
             new webpack.HashedModuleIdsPlugin(),
             new webpack.optimize.ModuleConcatenationPlugin(),
             new OptimizeCSSAssetsPlugin(),
-            new CopyWebpackPlugin([{ from: path.resolve(__dirname, "../static/**/*"), to: PATHS.resolveProject("demo/static") }]),
+            new CopyWebpackPlugin([{ from: "**/*", context: path.resolve(__dirname, "../static"), to: "static" }]),
             new MiniCssExtractPlugin({ filename: "css/[name].[hash].css" })
             // new BundleAnalyzerPlugin()
         ]
