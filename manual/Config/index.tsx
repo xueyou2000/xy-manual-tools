@@ -10,20 +10,20 @@ export interface DemoConfig {
 
 import ConfigJson from "./Demos.json";
 const configs: DemoConfig[] = [];
-    import Basic from 'E:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Basic'
+    import Basic from 'D:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Basic'
 configs.push({ component: <Basic />, ...(ConfigJson[0]) });
-import ShapeAndIcon from 'E:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\ShapeAndIcon'
+import ShapeAndIcon from 'D:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\ShapeAndIcon'
 configs.push({ component: <ShapeAndIcon />, ...(ConfigJson[1]) });
-import Size from 'E:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Size'
+import Size from 'D:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Size'
 configs.push({ component: <Size />, ...(ConfigJson[2]) });
-import Disabled from 'E:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Disabled'
+import Disabled from 'D:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Disabled'
 configs.push({ component: <Disabled />, ...(ConfigJson[3]) });
-import Loading from 'E:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Loading'
+import Loading from 'D:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Loading'
 configs.push({ component: <Loading />, ...(ConfigJson[4]) });
-import Ghost from 'E:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Ghost'
+import Ghost from 'D:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\Ghost'
 configs.push({ component: <Ghost />, ...(ConfigJson[5]) });
-import ButtonGroup from 'E:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\ButtonGroup'
+import ButtonGroup from 'D:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\ButtonGroup'
 configs.push({ component: <ButtonGroup />, ...(ConfigJson[6]) });
-import IconButtonGroup from 'E:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\IconButtonGroup'
+import IconButtonGroup from 'D:\\Develop\\WebDevelop\\Repos\\react-components\\xy-button\\examples\\IconButtonGroup'
 configs.push({ component: <IconButtonGroup />, ...(ConfigJson[7]) });
 export default configs;

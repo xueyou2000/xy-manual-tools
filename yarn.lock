@@ -6378,10 +6378,10 @@ xy-grid@^0.0.3:
     react-dom "^16.8.2"
     utils-hooks "0.0.65"
 
-xy-messagebox@0.0.52:
-  version "0.0.52"
-  resolved "https://registry.npm.taobao.org/xy-messagebox/download/xy-messagebox-0.0.52.tgz#fe37bd7473ada91362b7d0a1974e22a6dbdd9476"
-  integrity sha1-/je9dHOtqRNit9Chl04iptvdlHY=
+xy-messagebox@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.npm.taobao.org/xy-messagebox/download/xy-messagebox-0.0.6.tgz#8b1fdb4b180f261cc5c45683d179829c1852d5d7"
+  integrity sha1-ix/bSxgPJhzFxFaD0XmCnBhS1dc=
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.17"
     "@fortawesome/free-solid-svg-icons" "^5.8.1"
