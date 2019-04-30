@@ -96,3 +96,18 @@ module.exports.getManualSummary = function getManualSummary() {
 
     return [markdown.slice(0, imgIndex), markdown.slice(imgIndex, apiIndex), apiContent, markdown.slice(end)];
 };
+
+/**
+ * 更新tsconfig
+ */
+module.exports.updateTsconfig = function updateTsconfig() {
+    const packageJson = module.exports.getPackageConfig();
+    const tsconfigFile = path.resolve(__dirname, "../tsconfig.json");
+    const nowTsConfig = require(tsconfigFile);
+    nowTsConfig.paths = {
+        [packageJson.name]: ["src/index.tsx"],
+        [`${packageJson.name}/*`]: ["src/*"]
+    };
+
+    return tsconfigFile;
+};

@@ -8,6 +8,7 @@ const PATHS = require("./path");
 const tools = require("../tools");
 
 tools.createLoadExamplesEntry();
+const tsconfig = tools.updateTsconfig();
 
 module.exports = () => {
     const packageJson = tools.getPackageConfig();
@@ -51,7 +52,7 @@ module.exports = () => {
                         loader: require.resolve("awesome-typescript-loader"),
                         options: {
                             useCache: true,
-                            configFileName: PATHS.resolveProject("tsconfig.json")
+                            configFileName: tsconfig
                         }
                     }
                 },
