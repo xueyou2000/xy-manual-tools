@@ -8,9 +8,15 @@ import "xy-grid/assets/index.css";
 import configs from "../../Config";
 import "./index.scss";
 
-const leftCol = configs.slice(0, Math.floor(configs.length / 2));
-const rightCol = configs.slice(Math.floor(configs.length / 2));
+let leftCol = configs.slice(0, Math.floor(configs.length / 2));
+let rightCol = configs.slice(Math.floor(configs.length / 2));
 const cols = [leftCol, rightCol];
+
+if (leftCol.length === 0) {
+    let temp = leftCol;
+    leftCol = rightCol;
+    rightCol = temp;
+}
 
 export default function App() {
     return (
