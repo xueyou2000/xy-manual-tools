@@ -10,13 +10,15 @@ import "./index.scss";
 
 let leftCol = configs.slice(0, Math.floor(configs.length / 2));
 let rightCol = configs.slice(Math.floor(configs.length / 2));
-const cols = [leftCol, rightCol];
 
 if (leftCol.length === 0) {
     let temp = leftCol;
     leftCol = rightCol;
     rightCol = temp;
 }
+
+const cols = [leftCol, rightCol];
+
 
 export default function App() {
     return (
