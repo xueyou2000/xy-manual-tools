@@ -13,12 +13,17 @@ const tsconfig = tools.updateTsconfig();
 module.exports = () => {
     const packageJson = tools.getPackageConfig();
     const summarys = tools.getManualSummary();
+    const assetsExist = fs.existsSync(PATHS.resolveProject("./src/assets/index.js"));
+    let entry = [PATHS.resolveCodebox("main.tsx")];
+    if (assetsExist) {
+        entry.push(PATHS.resolveProject("./src/assets/index.js"));
+    }
 
     return {
         mode: "development",
         devtool: "eval-source-map",
         context: PATHS.projectDirectory,
-        entry: PATHS.resolveCodebox("main.tsx"),
+        entry: entry,
         output: {
             path: path.resolve(__dirname, "../dist"),
             filename: "js/[name].js",
