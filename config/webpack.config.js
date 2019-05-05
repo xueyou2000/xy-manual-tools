@@ -10,6 +10,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const PATHS = require("./path");
 const tools = require("../tools");
+const fs = require("fs-extra");
 
 tools.createLoadExamplesEntry();
 const tsconfig = tools.updateTsconfig();
@@ -17,11 +18,17 @@ const tsconfig = tools.updateTsconfig();
 module.exports = () => {
     const packageJson = tools.getPackageConfig();
     const summarys = tools.getManualSummary();
+    const assetsExist = fs.existsSync(PATHS.resolveProject("./src/assets/index.js"));
+    let entry = [PATHS.resolveCodebox("main.tsx")];
+    if (assetsExist) {
+        entry.push(PATHS.resolveProject("./src/assets/index.js"));
+    }
+
     return {
         mode: "production",
         devtool: "none",
         context: PATHS.projectDirectory,
-        entry: PATHS.resolveCodebox("main.tsx"),
+        entry,
         output: {
             path: PATHS.resolveProject("demo"),
             filename: "js/[name].js",
@@ -31,8 +38,7 @@ module.exports = () => {
             extensions: [".ts", ".tsx", ".js", ".jsx"],
             alias: {
                 [`${packageJson.name}$`]: PATHS.resolveProject("./src/index.tsx"),
-                [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js"),
-                [`../src/assets/index`]: PATHS.resolveProject("./src/assets/index.scss")
+                [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js")
             }
         },
         externals: {
