@@ -8,17 +8,11 @@ import "xy-grid/assets/index.css";
 import configs from "../../Config";
 import "./index.scss";
 
-let leftCol = configs.slice(0, Math.floor(configs.length / 2));
-let rightCol = configs.slice(Math.floor(configs.length / 2));
-
-if (leftCol.length === 0) {
-    let temp = leftCol;
-    leftCol = rightCol;
-    rightCol = temp;
-}
-
-const cols = [leftCol, rightCol];
-
+const cols = [[], []];
+configs.forEach((config, i) => {
+    const index = i % 2;
+    cols[index].push(config);
+});
 
 export default function App() {
     return (

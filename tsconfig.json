@@ -3,7 +3,7 @@
         "baseUrl": "./",
         "target": "es5",
         "module": "esnext",
-        "declaration": true,
+        "declaration": false,
         "skipLibCheck": true,
         "sourceMap": true,
         "jsx": "react",

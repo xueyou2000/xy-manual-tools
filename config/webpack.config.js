@@ -31,7 +31,8 @@ module.exports = () => {
             extensions: [".ts", ".tsx", ".js", ".jsx"],
             alias: {
                 [`${packageJson.name}$`]: PATHS.resolveProject("./src/index.tsx"),
-                [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js")
+                [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js"),
+                [`../src/assets/index`]: PATHS.resolveProject("./src/assets/index.scss")
             }
         },
         externals: {

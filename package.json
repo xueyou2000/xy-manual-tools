@@ -1,6 +1,6 @@
 {
     "name": "xy-manual-tools",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "一个UI组件的文档演示工具",
     "main": "bin/cli.js",
     "bin": {
