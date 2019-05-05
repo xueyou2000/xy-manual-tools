@@ -6,6 +6,7 @@ const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const PATHS = require("./path");
 const tools = require("../tools");
+const fs = require("fs-extra");
 
 tools.createLoadExamplesEntry();
 const tsconfig = tools.updateTsconfig();
