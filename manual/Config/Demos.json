@@ -1,7 +1,7 @@
 [
     {
         "fileName": "Simple",
-        "code": "import React, { useState } from \"react\";\r\nimport Skeleton from \"../src\";\r\nimport \"../src/assets/index\";\r\n\r\nexport default function() {\r\n    const [loading, setLoading] = useState(true);\r\n    return (\r\n        <div>\r\n            <button onClick={() => setLoading(!loading)}>切换</button>\r\n            <Skeleton loading={loading}>\r\n                <p>加载完毕</p>\r\n            </Skeleton>\r\n        </div>\r\n    );\r\n}\r\n",
+        "code": "import React, { useState } from \"react\";\r\nimport Skeleton from \"../src\";\r\n\r\nexport default function() {\r\n    const [loading, setLoading] = useState(true);\r\n    return (\r\n        <div>\r\n            <button onClick={() => setLoading(!loading)}>切换</button>\r\n            <Skeleton loading={loading}>\r\n                <p>加载完毕</p>\r\n            </Skeleton>\r\n        </div>\r\n    );\r\n}\r\n",
         "filePath": "E:\\Develop\\WebDevelop\\Repos\\react-components\\xy-skeleton\\examples\\Simple.tsx",
         "name": "Simple",
         "title": "简单使用",
