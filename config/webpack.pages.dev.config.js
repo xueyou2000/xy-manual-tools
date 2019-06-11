@@ -49,7 +49,11 @@ module.exports = () => {
             inline: true,
             open: true,
             quiet: true,
-            overlay: true
+            overlay: true,
+            historyApiFallback: {
+                index: "/",
+                verbose: true
+            }
         },
         module: {
             rules: [
