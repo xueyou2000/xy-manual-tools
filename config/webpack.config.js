@@ -33,8 +33,8 @@ module.exports = () => {
         entry,
         output: {
             path: PATHS.resolveProject("demo"),
-            filename: "js/[name]-page.js",
-            chunkFilename: "js/[name]-page.chunk.js"
+            filename: "js/[name].js",
+            chunkFilename: "js/[name].chunk.js"
         },
         resolve: {
             extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -116,7 +116,6 @@ module.exports = () => {
             }
         },
         plugins: [
-            new CopyWebpackPlugin([{ from: "**/*", context: path.resolve(__dirname, "../pages"), to: "./" }]),
             new webpack.DefinePlugin({
                 "process.env.componentName": JSON.stringify(packageJson.name),
                 "process.env.SummaryStart": JSON.stringify(summarys[0]),
@@ -124,7 +123,7 @@ module.exports = () => {
                 "process.env.SummaryAPI": JSON.stringify(summarys[2]),
                 "process.env.SummaryFooter": JSON.stringify(summarys[3])
             }),
-            // new CleanWebpackPlugin(),
+            new CleanWebpackPlugin(),
             new CaseSensitivePathsPlugin(),
             new HtmlWebpackPlugin({
                 filename: "index.html",

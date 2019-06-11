@@ -9,15 +9,15 @@ const PATHS = require("./path");
 const tools = require("../tools");
 const fs = require("fs-extra");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const exampleConfigs = tools.createLoadExamplesEntry();
+tools.createMenus();
 const tsconfig = tools.updateTsconfig();
-const { entries, htmlWebpackPlugins } = FindPages();
 
 module.exports = () => {
     const packageJson = tools.getPackageConfig();
     const assetsExist = fs.existsSync(PATHS.resolveProject("./src/assets/index.js"));
-    let entry = { main: PATHS.resolveCodebox("main.tsx"), ...entries };
+    let entry = { router: PATHS.resolveCodebox("router.tsx") };
     if (assetsExist) {
         entry["assets"] = PATHS.resolveProject("./src/assets/index.js");
     }
@@ -28,7 +28,7 @@ module.exports = () => {
         context: PATHS.projectDirectory,
         entry: entry,
         output: {
-            path: path.resolve(__dirname, "../pages"),
+            path: path.resolve(__dirname, "../dist"),
             filename: "js/[name].js",
             chunkFilename: "js/[name].chunk.js"
         },
@@ -111,37 +111,21 @@ module.exports = () => {
                 }
             }
         },
-        plugins: [new CaseSensitivePathsPlugin(), ...htmlWebpackPlugins, new webpack.HashedModuleIdsPlugin(), new webpack.optimize.ModuleConcatenationPlugin(), new OptimizeCSSAssetsPlugin()]
+        plugins: [
+            new CleanWebpackPlugin(),
+            new CopyWebpackPlugin([{ from: "**/*", context: path.resolve(__dirname, "../static"), to: "static" }]),
+            new CaseSensitivePathsPlugin(),
+            new HtmlWebpackPlugin({
+                filename: "index.html",
+                template: PATHS.resolveCodebox("Assets/index.html"),
+                inject: true,
+                title: packageJson.name
+            }),
+            new ManifestPlugin(),
+            new webpack.HashedModuleIdsPlugin(),
+            new webpack.optimize.ModuleConcatenationPlugin(),
+            new OptimizeCSSAssetsPlugin(),
+            new MiniCssExtractPlugin({ filename: "css/[name].[hash].css" })
+        ]
     };
 };
-
-/**
- * 寻找页面
- */
-function FindPages() {
-    const entries = {};
-    const htmlWebpackPlugins = exampleConfigs.map((c) => {
-        console.log("✔ \t", c.title, `${c.name}.html`);
-        let entryCode = `
-        import React from "react";
-        import ReactDOM from "react-dom";
-        import "../Assets/Styles/rest.css";
-        import Demo from "${path
-            .normalize(c.filePath)
-            .replace(/\\/g, "\\\\")
-            .replace(path.extname(c.filePath), "")}";
-        ReactDOM.render(<Demo />, document.getElementById("root"));
-`;
-        entries[c.name] = PATHS.resolveCodebox(`Entrys/${c.name}.tsx`);
-        fs.writeFileSync(entries[c.name], entryCode);
-        return new HtmlWebpackPlugin({
-            filename: `${c.name}.html`,
-            template: PATHS.resolveCodebox("Assets/index.html"),
-            inject: true,
-            title: c.title
-        });
-    });
-
-    console.log("\n\n");
-    return { entries, htmlWebpackPlugins };
-}

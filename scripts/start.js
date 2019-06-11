@@ -11,7 +11,7 @@ const PATHS = require("../config/path");
 module.exports = (cmd) => {
     process.env.prot = cmd.prot || "8080";
     tools
-        .spawnAsync("npm", ["run", cmd.separation ? "dev-all" : "dev"], {
+        .spawnAsync("npm", ["run", cmd.separation ? "dev-separation" : "dev"], {
             stdio: "inherit",
             cwd: path.resolve(__dirname, ".."),
             env: {

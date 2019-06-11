@@ -18,6 +18,7 @@ program
     .command("start")
     .option("-p, --prot [value]", "端口", "8080")
     .option("-s, --separation", "将每个例子打包为独立html页面")
+    .option("-h, --host", "指定开发服务器的host, 默认获取当前内网ip")
     .action(start);
 
 // run

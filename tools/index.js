@@ -3,6 +3,7 @@ const spawn = require("cross-spawn");
 const PATHS = require("../config/path");
 const glob = require("glob");
 const path = require("path");
+const os = require("os");
 
 /**
  * 寻找package配置
@@ -112,4 +113,73 @@ module.exports.updateTsconfig = function updateTsconfig() {
     };
 
     return tsconfigFile;
+};
+
+/**
+ * 创建独立页面菜单和配置
+ */
+module.exports.createMenus = function createMenus() {
+    const configs = module.exports.createManualConfig();
+
+    let links = "";
+    let imports = "";
+    let routesCfg = "";
+    configs.forEach((c) => {
+        const pathName = c.name[0].toLowerCase() + c.name.slice(1);
+        const componentName = c.name[0].toUpperCase() + c.name.slice(1);
+        links += `<li><Link to="/${pathName}">${c.title}</Link></li>\n`;
+        imports += `import ${componentName} from '${path
+            .normalize(c.filePath)
+            .replace(/\\/g, "\\\\")
+            .replace(path.extname(c.filePath), "")}'\n`;
+        routesCfg += `{ path: "/${pathName}", component: ${componentName} },\n`;
+    });
+
+    let routesCode = `
+    import { RouteConfig } from "react-router-config";
+    import Menus from '../menus';
+    ${imports}
+    
+    const routes: RouteConfig[] = [
+        {
+            path: "/",
+            exact: true,
+            component: Menus,
+        },
+        ${routesCfg}
+    ];
+    
+    export default routes;
+    `;
+    fs.writeFileSync(PATHS.resolveCodebox("Config/routes.tsx"), routesCode);
+
+    let code = `
+    import React from "react";
+    import { Link } from "react-router-dom";
+    
+    export default function Menus() {
+        return (
+            <ul className="manual-menus">${links}</ul>
+        );
+    }
+    `;
+    fs.writeFileSync(PATHS.resolveCodebox("menus.tsx"), code);
+};
+
+/**
+ * 获取内网ip
+ */
+module.exports.findHost = function findHost() {
+    var ifaces = os.networkInterfaces();
+    var host = null;
+
+    for (var dev in ifaces) {
+        ifaces[dev].forEach(function(details, alias) {
+            if (details.family == "IPv4" && details.address.indexOf("127") === -1) {
+                host = details.address;
+            }
+        });
+    }
+
+    return host;
 };
