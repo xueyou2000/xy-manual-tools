@@ -4,7 +4,6 @@ const chalk = require("chalk").default;
 const package = require("../package.json");
 const build = require("../scripts/build");
 const start = require("../scripts/start");
-const buildPages = require("../scripts/buildPages");
 
 const program = new commander.Command(package.name).version(package.version).usage(`${chalk.cyan(package.description)}`);
 

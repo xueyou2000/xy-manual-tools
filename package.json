@@ -1,6 +1,6 @@
 {
     "name": "xy-manual-tools",
-    "version": "0.1.5",
+    "version": "0.1.51",
     "description": "一个UI组件的文档演示工具",
     "main": "bin/cli.js",
     "bin": {
@@ -32,9 +32,9 @@
         "build-pages": "webpack --config config/webpack.pages.config.js --progress"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-svg-core": "^1.2.17",
-        "@fortawesome/free-solid-svg-icons": "^5.8.1",
-        "@fortawesome/react-fontawesome": "^0.1.4",
+        "@fortawesome/fontawesome-svg-core": "1.2.17",
+        "@fortawesome/free-solid-svg-icons": "5.8.1",
+        "@fortawesome/react-fontawesome": "0.1.4",
         "@microsoft/tsdoc": "^0.12.9",
         "awesome-typescript-loader": "^5.2.1",
         "case-sensitive-paths-webpack-plugin": "^2.2.0",
