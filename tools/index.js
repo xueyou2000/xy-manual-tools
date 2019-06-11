@@ -65,6 +65,8 @@ const configs: DemoConfig[] = [];
     });
     entryCode += `export default configs;`;
     fs.writeFileSync(PATHS.resolveCodebox("Config/index.tsx"), entryCode);
+
+    return configs;
 };
 
 /**

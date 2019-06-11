@@ -10,7 +10,7 @@ const PATHS = require("../config/path");
 
 module.exports = (cmd) => {
     tools
-        .spawnAsync("npm", ["run", "build"], {
+        .spawnAsync("npm", ["run", cmd.separation ? "build-all" : "build"], {
             stdio: "inherit",
             cwd: path.resolve(__dirname, ".."),
             env: {

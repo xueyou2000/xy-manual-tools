@@ -1,6 +1,6 @@
 {
     "name": "xy-manual-tools",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "一个UI组件的文档演示工具",
     "main": "bin/cli.js",
     "bin": {
@@ -24,8 +24,12 @@
     ],
     "scripts": {
         "dev": "webpack-dev-server --config config/webpack.dev.config.js",
+        "build": "webpack --config config/webpack.config.js --progress",
+        "dev-all": "npm run dev-pages && webpack-dev-server --config config/webpack.dev.config.js",
+        "build-all": "npm run build-pages && webpack --config config/webpack.config.js --progress",
         "build:polyfill": "webpack --config config/webpack.polyfill.config.js --progress",
-        "build": "webpack --config config/webpack.config.js --progress"
+        "dev-pages": "webpack --config config/webpack.pages.dev.config.js",
+        "build-pages": "webpack --config config/webpack.pages.config.js --progress"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.17",

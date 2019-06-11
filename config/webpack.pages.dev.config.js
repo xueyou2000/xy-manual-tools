@@ -1,4 +1,5 @@
 const path = require("path");
+const glob = require("glob");
 const webpack = require("webpack");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -7,21 +8,18 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const PATHS = require("./path");
 const tools = require("../tools");
 const fs = require("fs-extra");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-tools.createLoadExamplesEntry();
+const exampleConfigs = tools.createLoadExamplesEntry();
 const tsconfig = tools.updateTsconfig();
+const { entries, htmlWebpackPlugins } = FindPages();
 
 module.exports = () => {
     const packageJson = tools.getPackageConfig();
-    const summarys = tools.getManualSummary();
     const assetsExist = fs.existsSync(PATHS.resolveProject("./src/assets/index.js"));
-
-    let entry = {};
+    let entry = { main: PATHS.resolveCodebox("main.tsx"), ...entries };
     if (assetsExist) {
-        entry.assete = PATHS.resolveProject("./src/assets/index.js");
+        entry["assets"] = PATHS.resolveProject("./src/assets/index.js");
     }
-    entry.demo = PATHS.resolveCodebox("main.tsx");
 
     return {
         mode: "development",
@@ -29,9 +27,9 @@ module.exports = () => {
         context: PATHS.projectDirectory,
         entry: entry,
         output: {
-            path: path.resolve(__dirname, "../dist"),
-            filename: "js/[name]-page.js",
-            chunkFilename: "js/[name]-page.chunk.js"
+            path: path.resolve(__dirname, "../pages"),
+            filename: "js/[name].js",
+            chunkFilename: "js/[name].chunk.js"
         },
         resolve: {
             extensions: [".ts", ".tsx", ".js", ".jsx", ".css"],
@@ -43,14 +41,6 @@ module.exports = () => {
         externals: {
             react: "React",
             "react-dom": "ReactDOM"
-        },
-        devServer: {
-            port: process.env.prot || 8080,
-            hot: true,
-            inline: true,
-            open: true,
-            quiet: true,
-            overlay: true
         },
         module: {
             rules: [
@@ -120,26 +110,37 @@ module.exports = () => {
                 }
             }
         },
-        plugins: [
-            new CopyWebpackPlugin([{ from: "**/*", context: path.resolve(__dirname, "../pages"), to: "./" }]),
-            new webpack.DefinePlugin({
-                "process.env.componentName": JSON.stringify(packageJson.name),
-                "process.env.SummaryStart": JSON.stringify(summarys[0]),
-                "process.env.SummaryHeader": JSON.stringify(summarys[1]),
-                "process.env.SummaryAPI": JSON.stringify(summarys[2]),
-                "process.env.SummaryFooter": JSON.stringify(summarys[3])
-            }),
-            // new CleanWebpackPlugin(),
-            new CaseSensitivePathsPlugin(),
-            new HtmlWebpackPlugin({
-                filename: "index.html",
-                template: PATHS.resolveCodebox("Assets/index.html"),
-                inject: true,
-                title: packageJson.name
-            }),
-            new CopyWebpackPlugin([{ from: "**/*", context: path.resolve(__dirname, "../static"), to: "static" }]),
-            new webpack.HashedModuleIdsPlugin(),
-            new FriendlyErrorsWebpackPlugin()
-        ]
+        plugins: [new CaseSensitivePathsPlugin(), ...htmlWebpackPlugins, new webpack.HashedModuleIdsPlugin(), new FriendlyErrorsWebpackPlugin()]
     };
 };
+
+/**
+ * 寻找页面
+ */
+function FindPages() {
+    const entries = {};
+    const htmlWebpackPlugins = exampleConfigs.map((c) => {
+        console.log("✔ \t", c.title, `${c.name}.html`);
+        let entryCode = `
+        import React from "react";
+        import ReactDOM from "react-dom";
+        import "../Assets/Styles/rest.css";
+        import Demo from "${path
+            .normalize(c.filePath)
+            .replace(/\\/g, "\\\\")
+            .replace(path.extname(c.filePath), "")}";
+        ReactDOM.render(<Demo />, document.getElementById("root"));
+`;
+        entries[c.name] = PATHS.resolveCodebox(`Entrys/${c.name}.tsx`);
+        fs.writeFileSync(entries[c.name], entryCode);
+        return new HtmlWebpackPlugin({
+            filename: `${c.name}.html`,
+            template: PATHS.resolveCodebox("Assets/index.html"),
+            inject: true,
+            title: c.title
+        });
+    });
+
+    console.log("\n\n");
+    return { entries, htmlWebpackPlugins };
+}

@@ -51,8 +51,12 @@
 
 ## 开发
 
+参数`-s`启用打包独立页面, 每个例子都单独会有一个 html
+
 > `xy-manual-tools start -p 6006`
 
 ## 编译
+
+参数`-s`启用打包独立页面, 每个例子都单独会有一个 html
 
 > `xy-manual-tools build`
