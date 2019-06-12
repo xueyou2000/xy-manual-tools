@@ -24,13 +24,15 @@ module.exports = () => {
         entry["assets"] = PATHS.resolveProject("./src/assets/index.js");
     }
 
+    console.log("由于demo带路由, 所以编译后需要用静态服务器打开!");
+
     return {
         mode: "production",
         devtool: "none",
         context: PATHS.projectDirectory,
         entry: entry,
         output: {
-            path: path.resolve(__dirname, "../dist"),
+            path: PATHS.resolveProject("demo"),
             filename: "js/[name].js",
             chunkFilename: "js/[name].chunk.js"
         },
