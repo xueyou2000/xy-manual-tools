@@ -29,18 +29,18 @@ module.exports = () => {
         output: {
             path: path.resolve(__dirname, "../dist"),
             filename: "js/[name].js",
-            chunkFilename: "js/[name].chunk.js"
+            chunkFilename: "js/[name].chunk.js",
         },
         resolve: {
             extensions: [".ts", ".tsx", ".js", ".jsx", ".css"],
             alias: {
                 [`${packageJson.name}$`]: PATHS.resolveProject("./src/index.tsx"),
-                [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js")
-            }
+                [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js"),
+            },
         },
         externals: {
             react: "React",
-            "react-dom": "ReactDOM"
+            "react-dom": "ReactDOM",
         },
         devServer: {
             host: process.env.host || tools.findHost(),
@@ -52,8 +52,8 @@ module.exports = () => {
             overlay: true,
             historyApiFallback: {
                 index: "/",
-                verbose: true
-            }
+                verbose: true,
+            },
         },
         module: {
             rules: [
@@ -64,44 +64,44 @@ module.exports = () => {
                         loader: require.resolve("awesome-typescript-loader"),
                         options: {
                             useCache: true,
-                            configFileName: tsconfig
-                        }
-                    }
+                            configFileName: tsconfig,
+                        },
+                    },
                 },
                 {
                     test: /\.css$/,
-                    loaders: [require.resolve("style-loader"), require.resolve("css-loader")]
+                    loaders: [require.resolve("style-loader"), require.resolve("css-loader")],
                 },
                 {
                     test: /\.scss$/,
                     include: [PATHS.resolveProject("src"), PATHS.resolveProject("examples"), PATHS.codeboxDirectory],
-                    loaders: [require.resolve("style-loader"), require.resolve("css-loader"), require.resolve("sass-loader")]
+                    loaders: [require.resolve("style-loader"), require.resolve("css-loader"), require.resolve("sass-loader")],
                 },
                 {
                     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                     loaders: require.resolve("file-loader"),
                     options: {
                         limit: 100,
-                        name: "images/[name].[hash:7].[ext]"
-                    }
+                        name: "images/[name].[hash:7].[ext]",
+                    },
                 },
                 {
                     test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
                     loader: require.resolve("file-loader"),
                     options: {
                         limit: 100,
-                        name: "media/[name].[hash:7].[ext]"
-                    }
+                        name: "media/[name].[hash:7].[ext]",
+                    },
                 },
                 {
                     test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                     loader: require.resolve("file-loader"),
                     options: {
                         limit: 100,
-                        name: "fonts/[name].[hash:7].[ext]"
-                    }
-                }
-            ]
+                        name: "fonts/[name].[hash:7].[ext]",
+                    },
+                },
+            ],
         },
         optimization: {
             runtimeChunk: "single",
@@ -112,16 +112,16 @@ module.exports = () => {
                         name: "components",
                         chunks: "all",
                         enforce: true,
-                        priority: 1
+                        priority: 1,
                     },
                     bundle: {
                         test: /[\\/]node_modules[\\/]/,
                         name: "bundle",
                         chunks: "initial",
-                        priority: -10
-                    }
-                }
-            }
+                        priority: -10,
+                    },
+                },
+            },
         },
         plugins: [
             new CleanWebpackPlugin(),
@@ -131,10 +131,11 @@ module.exports = () => {
                 filename: "index.html",
                 template: PATHS.resolveCodebox("Assets/index.html"),
                 inject: true,
-                title: packageJson.name
+                title: packageJson.name,
+                env: "development",
             }),
             new webpack.HashedModuleIdsPlugin(),
-            new FriendlyErrorsWebpackPlugin()
-        ]
+            new FriendlyErrorsWebpackPlugin(),
+        ],
     };
 };
