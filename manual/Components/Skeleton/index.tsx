@@ -21,7 +21,7 @@ export default function App() {
                 <Affix className="top-affix" placement="top" offset={20}>
                     <ul className="demo-top">
                         {configs.map((cfg, i) => (
-                            <li title={cfg.title}>
+                            <li key={i} title={cfg.title}>
                                 <a href={`#${process.env.componentName}-${cfg.fileName}`}>{cfg.title}</a>
                             </li>
                         ))}
