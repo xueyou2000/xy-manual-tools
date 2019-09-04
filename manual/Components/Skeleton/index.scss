@@ -13,8 +13,8 @@
         color: #0d1a26;
         font-weight: 500;
         font-size: 30px;
-        font-family: Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-            sans-serif;
+        font-family: Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+            sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
         line-height: 38px;
         text-indent: 13px;
     }
@@ -27,13 +27,15 @@
     }
 
     .top-affix {
-        position: absolute;
+        position: fixed;
         top: 8px;
         right: 20px;
     }
 }
 
 .demo-top {
+    position: fixed;
+    right: 10px;
     margin: 16px 0;
     padding-left: 0;
     font-size: 12px;

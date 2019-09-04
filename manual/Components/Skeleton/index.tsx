@@ -2,7 +2,6 @@ import React from "react";
 import CodeBox from "../CodeBox";
 import CodeSource from "../CodeSource";
 import { markdown } from "markdown";
-import Affix from "xy-affix";
 import { Row, Col } from "xy-grid";
 import "xy-grid/assets/index.css";
 import configs from "../../Config";
@@ -18,15 +17,13 @@ export default function App() {
     return (
         <div className="xy-manual-container">
             <article>
-                <Affix className="top-affix" placement="top" offset={20}>
-                    <ul className="demo-top">
-                        {configs.map((cfg, i) => (
-                            <li key={i} title={cfg.title}>
-                                <a href={`#${process.env.componentName}-${cfg.fileName}`}>{cfg.title}</a>
-                            </li>
-                        ))}
-                    </ul>
-                </Affix>
+                <ul className="top-affix demo-top">
+                    {configs.map((cfg, i) => (
+                        <li key={i} title={cfg.title}>
+                            <a href={`#${process.env.componentName}-${cfg.fileName}`}>{cfg.title}</a>
+                        </li>
+                    ))}
+                </ul>
 
                 <div dangerouslySetInnerHTML={{ __html: markdown.toHTML(process.env.SummaryStart, "Maruku") }} />
                 <CodeSource language="md" html={process.env.SummaryHeader} />

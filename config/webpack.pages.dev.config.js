@@ -38,10 +38,10 @@ module.exports = () => {
                 [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js"),
             },
         },
-        externals: {
-            react: "React",
-            "react-dom": "ReactDOM",
-        },
+        // externals: {
+        //     react: "React",
+        //     "react-dom": "ReactDOM",
+        // },
         devServer: {
             host: process.env.host || tools.findHost(),
             port: process.env.prot || 8080,
