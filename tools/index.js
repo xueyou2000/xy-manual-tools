@@ -20,9 +20,14 @@ module.exports.getPackageConfig = function getPackageConfig() {
 /**
  * 运行
  */
-module.exports.spawnAsync = function spawnAsync(command, args, options) {
+module.exports.spawnAsync = function spawnAsync(command, args, options = {}) {
     return new Promise((resolve, reject) => {
-        const child = spawn(command, args, options);
+        const opt = options;
+        if (opt.env) {
+            opt.env = Object.assign(process.env, opt.env);
+        }
+
+        const child = spawn(command, args, opt);
         child.on("close", (code) => {
             if (code !== 0) {
                 reject(new Error(`command: ${command} ${args.toString()}`));
@@ -109,7 +114,7 @@ module.exports.updateTsconfig = function updateTsconfig() {
     const nowTsConfig = require(tsconfigFile);
     nowTsConfig.paths = {
         [packageJson.name]: ["src/index.tsx"],
-        [`${packageJson.name}/*`]: ["src/*"]
+        [`${packageJson.name}/*`]: ["src/*"],
     };
 
     return tsconfigFile;
