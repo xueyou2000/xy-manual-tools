@@ -1,6 +1,6 @@
 {
     "name": "xy-manual-tools",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "description": "一个UI组件的文档演示工具",
     "main": "bin/cli.js",
     "bin": {
@@ -55,8 +55,8 @@
         "optimize-css-assets-webpack-plugin": "^5.0.1",
         "ora": "^3.4.0",
         "prismjs": "^1.16.0",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
         "react-router-config": "^5.0.1",
         "react-router-dom": "^5.0.1",
         "sass-loader": "^7.1.0",

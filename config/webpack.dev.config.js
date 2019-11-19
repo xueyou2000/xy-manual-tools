@@ -38,6 +38,8 @@ module.exports = () => {
             alias: {
                 [`${packageJson.name}$`]: PATHS.resolveProject("./src/index.tsx"),
                 [`${packageJson.name}/assets/index`]: PATHS.resolveProject("./src/assets/index.js"),
+                [`react`]: PATHS.resolveProject("node_modules/react"),
+                [`react-dom`]: PATHS.resolveProject("node_modules/react-dom"),
             },
         },
         // externals: {
