@@ -1,6 +1,6 @@
 {
     "name": "xy-manual-tools",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "一个UI组件的文档演示工具",
     "main": "bin/cli.js",
     "bin": {
@@ -71,9 +71,7 @@
         "webpack-dev-server": "^3.3.1",
         "webpack-manifest-plugin": "^2.0.4",
         "xy-divider": "^0.0.51",
-        "xy-grid": "^0.0.6",
-        "xy-messagebox": "^0.0.91",
-        "xy-model": "^0.0.51"
+        "xy-messagebox": "^0.0.91"
     },
     "devDependencies": {
         "@types/classnames": "^2.2.7",

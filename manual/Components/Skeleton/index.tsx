@@ -2,8 +2,6 @@ import React from "react";
 import CodeBox from "../CodeBox";
 import CodeSource from "../CodeSource";
 import { markdown } from "markdown";
-import { Row, Col } from "xy-grid";
-import "xy-grid/assets/index.css";
 import configs from "../../Config";
 import "./index.scss";
 
@@ -32,17 +30,17 @@ export default function App() {
                     <span className="token punctuation">## </span>代码演示
                 </h2>
 
-                <Row className="code-boxes" gutter={16}>
+                <div className="code-boxes">
                     {cols.map((col, i) => (
-                        <Col span={24} xl={12} key={i}>
+                        <span className="code-boxes-col" key={i}>
                             {col.map((info) => (
                                 <CodeBox key={info.title} id={`${process.env.componentName}-${info.fileName}`} title={info.title} code={info.code} desc={info.desc}>
                                     {info.component}
                                 </CodeBox>
                             ))}
-                        </Col>
+                        </span>
                     ))}
-                </Row>
+                </div>
 
                 <h2 className="title  language-md">
                     <span className="token punctuation">## </span>API
